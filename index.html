@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it-IT" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">  
+        <title>Todo List | Cose da fare</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/checkbox-style.css">
+        <link rel="stylesheet" href="css/clock-style.css">
+
+        <!--Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <!--Clock-->
+                <div class="col-md-3 align-self-center order-md-1 order-2">
+                    <div class="bg-white p-3 pt-5 pb-5 rounded text-center min-vh-500">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-alarm" viewBox="0 0 16 16">
+                        <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z"/>
+                        <path d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z"/>
+                      </svg>
+                      <h2 class="ora-esatta mt-2">00:00:00</h2>
+                      <div class="row content-sveglia">
+                        <div class="col-6 mt-3 campo-sveglia pe-1">
+                          <select>
+                            <option value="Hour" selected disabled hidden>Ora</option>
+                          </select>
+                        </div>
+                        <div class="col-6 mt-3 campo-sveglia ps-1">
+                          <select>
+                            <option value="Minute" selected disabled hidden>Minuti</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-12 mt-4">
+                        <button class="imposta-sveglia btn btn-danger text-white">Imposta Sveglia</button>
+                        <div class="time-remaining mt-2"></div>
+                      </div>
+                    </div>
+                </div>
+
+                <!--To do list-->
+                <div class="col-md-6 order-md-2 order-1">
+                    <div class="bg-white p-3 pt-5 pb-5 rounded min-vh-500">
+                        <div class="task-input">
+                            <img src="images/task.svg" alt="Aggiungi una task"/>
+                            <input type="text" placeholder="Aggiungi una task">
+                        </div>
+                        <div class="controls">
+                            <div class="filters">
+                                <span class="active" id="all">Tutti</span>
+                                <span id="pending">In Attesa</span>
+                                <span id="completed">Completato</span>
+                            </div>
+                            <button class="clear-btn">Cancella tutto</button>
+                        </div>
+                        <ul class="task-box"></ul>
+                    </div>
+                </div>
+
+                <!--Music/Notifiche-->
+                <div class="col-md-3 order-md-3 order-3">
+                    <div class="bg-white p-3 pt-5 pb-5 rounded min-vh-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-music-note-list" viewBox="0 0 16 16">
+                        <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
+                        <path fill-rule="evenodd" d="M12 3v10h-1V3h1z"/>
+                        <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z"/>
+                        <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--JS-->
+        <script src="js/todolist.js"></script>
+        <script src="js/clock24.js"></script>
+        <!--Bootstrap-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    </body>
+</html>
