@@ -3,6 +3,11 @@ filters = document.querySelectorAll(".filters span"),
 clearAll = document.querySelector(".clear-btn"),
 taskBox = document.querySelector(".task-box");
 
+const confirmModal = document.querySelector('.confirm-modal');
+const confirmButton = document.querySelector('#confirm-delete');
+const cancelButton = document.querySelector('#cancel-delete');
+
+
 let editId,
 isEditTask = false,
 todos = JSON.parse(localStorage.getItem("todo-list"));
@@ -82,12 +87,31 @@ function deleteTask(deleteId, filter) {
     showTodo(filter);
 }
 
-clearAll.addEventListener("click", () => {
+// clearAll.addEventListener("click", () => {
+//     if (confirm("Sei sicuro di voler eliminare tutte le attività?")) {
+//       isEditTask = false;
+//       todos.splice(0, todos.length);
+//       localStorage.setItem("todo-list", JSON.stringify(todos));
+//       showTodo();
+//     }
+//   });
+
+clearAll.addEventListener('click', () => {
+    confirmModal.style.display = 'block';
+  });
+  
+  cancelButton.addEventListener('click', () => {
+    confirmModal.style.display = 'none';
+  });
+  
+  confirmButton.addEventListener('click', () => {
     isEditTask = false;
     todos.splice(0, todos.length);
-    localStorage.setItem("todo-list", JSON.stringify(todos));
-    showTodo()
-});
+    localStorage.setItem('todo-list', JSON.stringify(todos));
+    showTodo();
+    confirmModal.style.display = 'none';
+  });
+  
 
 taskInput.addEventListener("keyup", e => {
     let userTask = taskInput.value.trim();

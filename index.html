@@ -4,17 +4,106 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">  
         <title>Todo List | Cose da fare</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="css/checkbox-style.css">
-        <link rel="stylesheet" href="css/clock-style.css">
 
         <!--Bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="css/menu.css">
     </head>
     <body>
+
+      <section class="bg-red">
+        <!--Menu-->
+        <ul class="menu">
+          <li><a class="menuItem" href="#">Come usare la To Do List</a></li>
+          <li><a class="menuItem" href="#">Profile</a></li>
+          <li><a class="menuItem" href="#">About</a></li>
+          <li><a class="menuItem" href="mailto:marcogattone97@gmail.com">Contattami</a></li>
+        </ul>
+        <button class="hamburger">
+          <i class="menuIcon material-icons">
+            <svg width="36" height="24" class="open-menu" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4792 22C17.4792 21.6685 17.6438 21.3505 17.9368 21.1161C18.2298 20.8817 18.6273 20.75 19.0417 20.75H33.625C34.0394 20.75 34.4368 20.8817 34.7299 21.1161C35.0229 21.3505 35.1875 21.6685 35.1875 22C35.1875 22.3315 35.0229 22.6495 34.7299 22.8839C34.4368 23.1183 34.0394 23.25 33.625 23.25H19.0417C18.6273 23.25 18.2298 23.1183 17.9368 22.8839C17.6438 22.6495 17.4792 22.3315 17.4792 22ZM7.47917 12C7.47917 11.6685 7.64379 11.3505 7.93681 11.1161C8.22984 10.8817 8.62727 10.75 9.04167 10.75H33.625C34.0394 10.75 34.4368 10.8817 34.7299 11.1161C35.0229 11.3505 35.1875 11.6685 35.1875 12C35.1875 12.3315 35.0229 12.6495 34.7299 12.8839C34.4368 13.1183 34.0394 13.25 33.625 13.25H9.04167C8.62727 13.25 8.22984 13.1183 7.93681 12.8839C7.64379 12.6495 7.47917 12.3315 7.47917 12ZM0.8125 2C0.8125 1.66848 0.97712 1.35054 1.27015 1.11612C1.56317 0.881696 1.9606 0.75 2.375 0.75H33.625C34.0394 0.75 34.4368 0.881696 34.7299 1.11612C35.0229 1.35054 35.1875 1.66848 35.1875 2C35.1875 2.33152 35.0229 2.64946 34.7299 2.88388C34.4368 3.1183 34.0394 3.25 33.625 3.25H2.375C1.9606 3.25 1.56317 3.1183 1.27015 2.88388C0.97712 2.64946 0.8125 2.33152 0.8125 2Z" fill="white"/>
+            </svg>
+          </i>
+          <i class="closeIcon material-icons">
+            <svg width="50" height="40" class="close-menu" viewBox="0 0 50 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M38.174 29.1875L11.914 10.9006" stroke="white" stroke-width="3" stroke-linecap="round"/>
+              <path d="M12.044 29.0439L38.0084 10.8125" stroke="white" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+          </i>
+        </button>
+
+        <div class="container">
+          <div class="row h-50">
+            <div class="col-12 center">
+              <h1 class="t-white">To Do List</h1>
+              <p class="t-white">Gestisci il tuo tempo</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
         <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <!--Clock-->
+            <div class="row">
+
+                <!--To do list-->
+                <div class="col-md-12 order-md-2 order-1">
+                  <div class="task-input" style="margin-top:-30px;">
+                    <input class="w-100 input-task" type="text" placeholder="✍🏻  Aggiungi una task da fare">
+                  </div>
+
+                  <div class="mt-4 mb-5 controls row">
+                    <div class="filters col-7 align-self-center">
+                      <span class="active" id="all">Tutti</span>
+                      <span id="pending">In Attesa</span>
+                      <span id="completed">Completato</span>
+                    </div>
+                    <div class="col-5">
+                      <!-- <button type="button" class="clear-btn float-end">Cancella tutto</button> -->
+                      <button type="button" class="clear-btn float-end" data-bs-toggle="modal" data-bs-target="#confirmModal">Cancella tutto</button>
+                    </div>
+                  </div>
+                  <ul class="task-box"></ul>
+
+                </div>
+                
+            </div>
+        </div>
+
+
+        <!--DELETE-->
+        <!---SISTEMARE IL CODICE!! --->
+        <!-- Modal -->
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Conferma Eliminazione</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Sei sicuro di voler eliminare tutte le attività?
+              </div>
+              <div class="modal-footer button-container">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="confirm-delete">Elimina</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="" style="display: none!important;">
+          <p id="staticBackdropLabel">Sei sicuro di voler eliminare tutte le attività?</p>
+          <div class="button-container">
+            <button id="confirm-delete">Elimina</button>
+            <button id="cancel-delete" data-bs-dismiss="modal" aria-label="Close">Annulla</button>
+          </div>
+        </div>
+        
+                <!--Clock
                 <div class="col-md-3 align-self-center order-md-1 order-2">
                     <div class="bg-white p-3 pt-5 pb-5 rounded text-center min-vh-500">
                       <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-alarm" viewBox="0 0 16 16">
@@ -39,44 +128,23 @@
                         <div class="time-remaining mt-2"></div>
                       </div>
                     </div>
-                </div>
+                </div>-->
 
-                <!--To do list-->
-                <div class="col-md-6 order-md-2 order-1">
-                    <div class="bg-white p-3 pt-5 pb-5 rounded min-vh-500">
-                        <div class="task-input">
-                            <img src="images/task.svg" alt="Aggiungi una task"/>
-                            <input type="text" placeholder="Aggiungi una task">
-                        </div>
-                        <div class="controls">
-                            <div class="filters">
-                                <span class="active" id="all">Tutti</span>
-                                <span id="pending">In Attesa</span>
-                                <span id="completed">Completato</span>
-                            </div>
-                            <button class="clear-btn">Cancella tutto</button>
-                        </div>
-                        <ul class="task-box"></ul>
-                    </div>
-                </div>
-
-                <!--Music/Notifiche-->
-                <div class="col-md-3 order-md-3 order-3">
-                    <div class="bg-white p-3 pt-5 pb-5 rounded min-vh-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-music-note-list" viewBox="0 0 16 16">
-                        <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
-                        <path fill-rule="evenodd" d="M12 3v10h-1V3h1z"/>
-                        <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z"/>
-                        <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--Idee funzionalità aggiuntive-->
+        <!--
+          1. Notifica dopo x tempo per chiedere: "hai svolto la task xyz?"
+          2. Funzionalità clock/sveglia (stile pomodoro)
+          3. Aggiungere funzionalità App + manifest
+          4. Cursore Custom
+          5. Dopo x task aggiunti compare una notifica (Sembra tu abbia molto lavoro da fare!)
+          6. Cancella tutto - Messagio, (Sei sicuro di voler cancellare tutte le task?)
+        -->
 
         <!--JS-->
-        <script src="js/todolist.js"></script>
-        <script src="js/clock24.js"></script>
+        <script src="js/todolist-edit.js"></script>
+        <!-- <script src="js/clock24.js"></script> -->
+
+        <script src="js/menu.js"></script>
         <!--Bootstrap-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     </body>
