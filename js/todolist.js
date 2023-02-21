@@ -2,6 +2,9 @@ const taskInput = document.querySelector(".task-input input"),
 filters = document.querySelectorAll(".filters span"),
 clearAll = document.querySelector(".clear-btn"),
 taskBox = document.querySelector(".task-box");
+const confirmModal = document.querySelector('.confirm-modal');
+const confirmButton = document.querySelector('#confirm-delete');
+const cancelButton = document.querySelector('#cancel-delete');
 
 let editId,
 isEditTask = false,
@@ -82,12 +85,42 @@ function deleteTask(deleteId, filter) {
     showTodo(filter);
 }
 
-clearAll.addEventListener("click", () => {
+/*Add task with button*/
+function addTask() {
+    let newTaskInput = document.getElementById("task-input");
+    let newTask = newTaskInput.value.trim();
+    if (newTask !== "") {
+      if (!todos) {
+        todos = [];
+      }
+      todos.push({ name: newTask, status: "pending" });
+      localStorage.setItem("todo-list", JSON.stringify(todos));
+      showTodo(
+        document.querySelector("span.active") ? document.querySelector("span.active").id : "all"
+      );
+      newTaskInput.value = "";
+    }
+  }
+  
+  document.getElementById("add-task-btn").addEventListener("click", addTask);
+/**/
+
+clearAll.addEventListener('click', () => {
+    confirmModal.style.display = 'block';
+  });
+  
+  cancelButton.addEventListener('click', () => {
+    confirmModal.style.display = 'none';
+  });
+  
+  confirmButton.addEventListener('click', () => {
     isEditTask = false;
     todos.splice(0, todos.length);
-    localStorage.setItem("todo-list", JSON.stringify(todos));
-    showTodo()
-});
+    localStorage.setItem('todo-list', JSON.stringify(todos));
+    showTodo();
+    confirmModal.style.display = 'none';
+  });
+  
 
 taskInput.addEventListener("keyup", e => {
     let userTask = taskInput.value.trim();
